@@ -1,5 +1,6 @@
 package tree;
 
+
 /**
  * BBT
  * 平衡二叉树
@@ -12,11 +13,11 @@ public class BalancedBinaryTree {
 		 Object[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };  //构造二叉树的结点值
 		 TreeNode root = BinaryTree.createBinaryTree(array);
 		 System.out.println(isBalanced(root));
-		 
 	}
 	
 	/**
-	 * 判断一棵二叉树是不是平衡二叉树
+	 * 方法一：
+	 * 判断一棵二叉树是不是平衡二叉树（这种方法存在很多重复结点的遍历，效率不高）
 	 * BBT
 	 * 递归
 	 * 通过二叉树的高度进行比较
@@ -46,6 +47,16 @@ public class BalancedBinaryTree {
     	int left = depthOfBT(root.left);
     	int right = depthOfBT(root.right);
     	return left > right ? left + 1 : right + 1;
+    }
+    
+   /**
+    * 方法二：
+    * 不存在重复遍历结点的情况，遍历二叉树的深度
+    * @param root
+    * @return
+    */
+    public static boolean isBalancedBT(TreeNode root){
+    	
     }
 
 }
