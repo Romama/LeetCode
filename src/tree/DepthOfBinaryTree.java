@@ -1,6 +1,8 @@
 package tree;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -14,11 +16,31 @@ public class DepthOfBinaryTree {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		 Object[] array = { 1, 2, 3, 4, 5, 6, 7 };  //构造二叉树的结点值
+		 TreeNode root = BinaryTree.createBinaryTree(array);
+		 
+		 //递归算法求二叉树的深度
+		 int h = depthRecursive(root);
+		 System.out.println(h);
+		 
+		 //迭代算法求二叉树的深度
+		 h = depthIteration(root);
+		 System.out.println(h);
+		 
+		 //层次遍历算法求二叉树的深度
+		 h = depthLevelTraversal(root);
+		 System.out.println(h);
+		 
 	}
 	
 	/**
 	 * 方法一：
 	 * 递归求二叉树的深度
+	 * 
+	 * 结点为null时，深度为0
+	 * 结点不为null，分别求出左、右子树的深度，
+	 * 找出左、右结点深度的最大值
+	 * 当前结点的深度即为上面所求的最大值
 	 * @return
 	 */
 	public static int depthRecursive(TreeNode root){
@@ -32,30 +54,47 @@ public class DepthOfBinaryTree {
 	
 	/**
 	 * 方法二：
-	 * 受后根遍历算法的启发，求二叉树的深度
+	 * 基于先序遍历算法，求二叉树的最大高度
 	 * @param root
 	 * @return
 	 */
 	public static int depthIteration(TreeNode root){
 	
-		if(root == null)
-			return 0;
-		int maxDepth = 0; //记录当前结点的最大深度
-		TreeNode pre = null;
-		Stack<TreeNode> stack = new Stack<TreeNode>();
-		TreeNode p = root;
-		while(p != null || !stack.isEmpty()){
-			while(p != null){
-				stack.push(p);
-				p = p.left;
-			}
-			
-			TreeNode node = stack.peek().right;
-			if(pre == node || node == null){//右子树已经遍历或没有右子树
-				
-			}
-		}
-
+		if(root == null){
+            return 0;
+        }
+		
+		//存储每个结点的高度
+        HashMap<TreeNode, Integer> depthMap = new HashMap<TreeNode,Integer>();
+        
+        //根结点的高度默认为1
+        depthMap.put(root, 1);
+        
+        //记录最大高度
+        int maxDepth = 1;
+        
+        //定义一个栈，用来进行先序遍历
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            //结点出栈
+            int depth = depthMap.get(node);
+            maxDepth = Math.max(maxDepth, depth);
+            if (node.right != null) {//迭代的先序遍历二叉树，首先压入右子树
+                depthMap.put(node.right, depth + 1);
+                stack.push(node.right);
+            }
+            if (node.left != null) {//然后压入左子树
+                depthMap.put(node.left, depth + 1);
+                stack.push(node.left);
+            }
+            
+            //最后，将该结点对应的高度也从HashMap中删除
+            depthMap.remove(node);
+        }
+        return maxDepth;
+		
 	}
 	
 	/**
@@ -67,28 +106,23 @@ public class DepthOfBinaryTree {
 	public static int depthLevelTraversal(TreeNode root){
 		if(root == null)
 			return 0;
-		int count = 1;
-		int depth = 0; //深度
 		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.add(root);
+		int nCount = 1; //记录第n层的结点个数、
+		int height = 0;
 		while(!queue.isEmpty()){
 			TreeNode node = queue.poll();
-			count--;
-			if(count == 0)
-				depth++;
-			
-			if(node.left != null){
+			nCount--;
+			if(node.left != null)
 				queue.add(node.left);
-				count++;
-			}
-				
-			if(node.right != null){
+			if(node.right != null)
 				queue.add(node.right);
-				count++;
-			}	
+			
+			if(nCount == 0){ //遍历完一层,给nCount赋值下一层的结点个数
+				height++;
+				nCount = queue.size();
+			}
 		}
-		
-		return depth;
+		return height;
 	}
-
 }

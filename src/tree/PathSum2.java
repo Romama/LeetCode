@@ -3,6 +3,11 @@ package tree;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 遍历二叉树，返回和为sum的所有路径
+ * @author WeiCuicui
+ *
+ */
 public class PathSum2 {
 
 	static List<List<Integer>> result = new ArrayList<List<Integer>>();  //结果集
@@ -53,7 +58,7 @@ public class PathSum2 {
     }  
     
     /**
-     * 方法二：getPath(TreeNode root, int sum)
+     * 方法二：getPath(TreeNode root, int sum)，回溯
      * @param root
      * @param sum
      * @return
@@ -65,7 +70,7 @@ public class PathSum2 {
     	path.add(Integer.parseInt(root.val.toString()));
     	
     	if(root.left == null && root.right == null && sum == 0){ //找到一条路径
-    		List<Integer> newpath = new ArrayList<Integer>(path);
+    		List<Integer> newpath = new ArrayList<Integer>(path);//创建一个new ArrayList，将path中的值复制过来，才能加入到结果集中
 			result.add(newpath);
     	} 
     	
