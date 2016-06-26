@@ -2,7 +2,6 @@ package tree;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -51,54 +50,10 @@ public class DepthOfBinaryTree {
 		
 		return left > right ? left + 1 : right + 1;
 	}
+
 	
 	/**
 	 * 方法二：
-	 * 基于先序遍历算法，求二叉树的最大高度
-	 * @param root
-	 * @return
-	 */
-	public static int depthIteration(TreeNode root){
-	
-		if(root == null){
-            return 0;
-        }
-		
-		//存储每个结点的高度
-        HashMap<TreeNode, Integer> depthMap = new HashMap<TreeNode,Integer>();
-        
-        //根结点的高度默认为1
-        depthMap.put(root, 1);
-        
-        //记录最大高度
-        int maxDepth = 1;
-        
-        //定义一个栈，用来进行先序遍历
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            //结点出栈
-            int depth = depthMap.get(node);
-            maxDepth = Math.max(maxDepth, depth);
-            if (node.right != null) {//迭代的先序遍历二叉树，首先压入右子树
-                depthMap.put(node.right, depth + 1);
-                stack.push(node.right);
-            }
-            if (node.left != null) {//然后压入左子树
-                depthMap.put(node.left, depth + 1);
-                stack.push(node.left);
-            }
-            
-            //最后，将该结点对应的高度也从HashMap中删除
-            depthMap.remove(node);
-        }
-        return maxDepth;
-		
-	}
-	
-	/**
-	 * 方法三：
 	 * 受层序遍历算法的启发，求出二叉树有多少层，也就知道了二叉树的高度是多少
 	 * @param root
 	 * @return
@@ -108,7 +63,7 @@ public class DepthOfBinaryTree {
 			return 0;
 		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.add(root);
-		int nCount = 1; //记录第n层的结点个数、
+		int nCount = 1; //记录第n层的结点个数
 		int height = 0;
 		while(!queue.isEmpty()){
 			TreeNode node = queue.poll();
@@ -119,10 +74,48 @@ public class DepthOfBinaryTree {
 				queue.add(node.right);
 			
 			if(nCount == 0){ //遍历完一层,给nCount赋值下一层的结点个数
-				height++;
+				height++; //一层遍历完，高度加1
 				nCount = queue.size();
 			}
 		}
 		return height;
+	}
+	
+	
+	/**
+	 * 方法三：
+	 * 基于先序遍历算法，求二叉树的最大高度
+	 * @param root
+	 * @return
+	 */
+	public static int depthIteration(TreeNode root){
+		
+		if(root == null)
+			return 0;
+		HashMap<TreeNode, Integer> depthMap = new HashMap<TreeNode, Integer>();
+		int maxDepth = 1;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		stack.push(root);
+		depthMap.put(root, 1);
+		TreeNode node = null;
+		int depth = 0;
+		
+		while(!stack.isEmpty()){
+			node = stack.pop(); //出栈，下面对应将该节点的深度删除
+			depth = depthMap.get(node);
+			maxDepth = Math.max(depth, maxDepth);
+			if(node.right != null){
+				stack.push(node.right);
+				depthMap.put(node.right, depth + 1); //右孩子结点的深度  = 父结点的深度 + 1
+			}
+			if(node.left != null){
+				stack.push(node.left);
+				depthMap.put(node.left, depth + 1); //左孩子结点的深度  = 父结点的深度 + 1
+			}
+			
+			depthMap.remove(node); //伴随着结点的出栈，一定要将这个结点对应的高度删除掉
+		}
+	
+		return maxDepth;
 	}
 }
