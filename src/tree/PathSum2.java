@@ -58,6 +58,7 @@ public class PathSum2 {
     }  
     
     /**
+     * 求二叉树中满足和为sum的所有路径
      * 方法二：getPath(TreeNode root, int sum)，回溯
      * @param root
      * @param sum
@@ -70,7 +71,8 @@ public class PathSum2 {
     	path.add(Integer.parseInt(root.val.toString()));
     	
     	if(root.left == null && root.right == null && sum == 0){ //找到一条路径
-    		List<Integer> newpath = new ArrayList<Integer>(path);//创建一个new ArrayList，将path中的值复制过来，才能加入到结果集中
+    		//创建一个new ArrayList，将path中的值复制过来，才能加入到结果集中
+    		List<Integer> newpath = new ArrayList<Integer>(path);
 			result.add(newpath);
     	} 
     	
@@ -80,7 +82,5 @@ public class PathSum2 {
     	//恢复sum和path变量
     	sum = sum + Integer.parseInt(root.val.toString()); 
     	path.remove(path.size() - 1);
-    	
-    	return;
     }  
 }

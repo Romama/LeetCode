@@ -12,9 +12,9 @@ public class PathSum {
 
 	
 	public static void main(String[] args){
-		 Object[] array = { 1 };  //构造二叉树的结点值
+		 Object[] array = {2,3,1,4,6,7};  //构造二叉树的结点值
 		 TreeNode root = BinaryTree.createBinaryTree(array);
-		 int sum = 1;
+		 int sum = 10;
 		 System.out.println(hasPathSum(root, sum));
 	}
 	
