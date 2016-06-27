@@ -25,7 +25,7 @@ public class KthPermutation {
 	public static String getKthPermutation(int n,int k){
 		
 		//存储数组元素
-	    List<Integer> numbers = new ArrayList<>();
+	    List<Integer> numbers = new ArrayList<Integer>();
 	    
 	    //存储i个元素有多少种排列
 	    int[] factorial = new int[n + 1];
