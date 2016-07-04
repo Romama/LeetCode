@@ -1,6 +1,7 @@
 package medium;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,8 +15,9 @@ public class Combinations {
 		// TODO Auto-generated method stub
 
 		//定义一个集合
-		int[] array = {7,8,9,7};
+		int[] array = {1,2,2,2};
 		System.out.println(getAllCombinations(array));
+		
 	}
 	
 	/**
@@ -26,14 +28,12 @@ public class Combinations {
 	 * @return
 	 */
 	public static List<List<Integer>> getAllCombinations(int[] array){
-		List<List<Integer>> list = new ArrayList<List<Integer>>();
-		if(array == null || array.length == 0)
-			return list;
-    
-        List<Integer> item = new ArrayList<Integer>();
-        //dfs(array,0,item,list); //because it need to begin from 1
-        dfs_repeated(array, 0, item, list);
-        return list;
+		    Arrays.sort(array);
+		    List<List<Integer>> list = new ArrayList<List<Integer>>();
+		    List<Integer> item = new ArrayList<Integer>();
+		    dfs_repeated(list, item, 0, array);
+		    //dfs(array, 0, each, res);
+		    return list;
 	}
 
     /**
@@ -58,29 +58,23 @@ public class Combinations {
     }
     
     /**
-     * 情景二：存在重复元素
+     * 情景二：存在重复元素，解决方法参考subsetsII
+     * 求子集的算法同求重复元素的算法原理是相同的！
+     * 首先对数组元素进行排序
      * {1,2,2}的所有组合有 1,2,12,122
      */
-    public static void dfs_repeated(int[] array,int start,List<Integer> item,List<List<Integer>> list){
+    public static void dfs_repeated(List<List<Integer>> list, List<Integer> item, int start, int[] array){
   
-    	if(item.size() != 0){
-    		List<Integer> t = new ArrayList<Integer>(item);
-            list.add(t);
+    	if(item.size() > 0)
+            list.add(new ArrayList<Integer>(item));
+    	int i = start;
+    	while(i < array.length){
+    		item.add(array[i]);
+    		dfs_repeated(list, item, i + 1, array);
+    		item.remove(item.size() - 1);
+    		i++;
+    		while(i < array.length && array[i] == array[i - 1])
+    			i++;
     	}
-    	
-        for(int i = start,n = array.length;i < n;i++){
-        	boolean flag = false;
-        	for(int j = i + 1; j < array.length; j++)
-        		if(array[j] == array[i]){
-        			flag = true;
-        			continue;
-        		}
-        	if(!flag){
-        		item.add(array[i]);
-                dfs(array,i + 1,item,list);
-                item.remove(item.size() - 1);
-        	}
-        	
-        }
     }
 }
