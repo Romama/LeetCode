@@ -47,7 +47,7 @@ public class ValidPerfectSquare {
         long low = 1,high = num / 2;
         long mid = low + (high - low) / 2;
         while(low <= high){
-        	if(mid * mid == num){ //可能越界
+        	if(mid * mid == num){ //可能越界，因此声明类型是long
         		return true;
         	}
         	else if(mid * mid < num)

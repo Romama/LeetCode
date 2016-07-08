@@ -50,11 +50,13 @@ public class SqrtX {
 			flag = true;
 			return -1;
 		}
+		
 		if(x == 0)
 			return 0;
 		if(x == 1)
 			return 1;
-		//初始low与high
+		
+		//初始low与high，high初始化为  x/2
 		int low = 1,high = x / 2;
 		int mid = low + (high - low) / 2; //防止出现越界，用这种方式来替代 (low + high) /2
 		while(low <= high){
