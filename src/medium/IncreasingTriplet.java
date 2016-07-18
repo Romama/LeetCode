@@ -9,11 +9,12 @@ public class IncreasingTriplet {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] nums = {1,1,-2,6};
+		int[] nums = {1,1,-1,6};
 		System.out.println(hasIncreasingTriplet(nums));
 
 	}
 	
+	//是否存在长度为3的递增子序列
 	public static boolean hasIncreasingTriplet(int[] nums){
 		if(nums == null || nums.length <= 2)
 			return false;
@@ -23,7 +24,7 @@ public class IncreasingTriplet {
 				min1 = nums[i];
 			else if(nums[i] < min2) //这里 < 或者 <= 都可以
 				min2 = nums[i];
-			else if(nums[i] > min1 && nums[i] > min2)
+			else if(nums[i] > min1 && nums[i] > min2)//同时大于min1和min2，说明存在长度为3的递增子序列
 				return true;
 		}
 		return false;

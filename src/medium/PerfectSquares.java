@@ -1,6 +1,5 @@
 package medium;
 
-import java.util.Arrays;
 
 /**
  * Given a positive integer n, find the least number of perfect square numbers 
@@ -14,32 +13,33 @@ public class PerfectSquares {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		int x = 12;
+		int x = 19;
 		System.out.println(getPerfectSquare(x));
 	}
 	
 	/**
-	 * perfect squares
-	 * @param x
+	 * perfect squares，动态规划
+	 * @param n 为正整数
 	 * @return
 	 */
 	public static int getPerfectSquare(int n){
+		if(n <= 0)
+			return 0;
+		
+		//数字i能够拆分的最少完全平方数
 		int[] dp = new int[n + 1];
-        // 将所有非平方数的结果置最大，保证之后比较的时候不被选中
-        Arrays.fill(dp, Integer.MAX_VALUE);
-        // 将所有平方数的结果置1
-        for(int i = 0; i * i <= n; i++){
-            dp[i * i] = 1;
-        }
-        // 从小到大找任意数a
-        for(int a = 0; a <= n; a++){
-            // 从小到大找平方数bｘb
-            for(int b = 0; a + b * b <= n; b++){
-                // 因为a+b*b可能本身就是平方数，所以我们要取两个中较小的
-                dp[a + b * b] = Math.min(dp[a] + 1, dp[a + b * b]);
-            }
-        }
-        return dp[n];
+		for(int k = 1; k <= n; ++k)
+			dp[k] = Integer.MAX_VALUE;
+		//这个必须初始化为0
+		dp[0] = 0;
+		//动态规划，求1-n之间的每个数能拆分的最小平方数
+		for(int i = 1; i <= n; ++i){
+			for(int j = 1; j * j <= i; ++j){
+				dp[i] = Math.min(dp[i], dp[i - j * j] + 1);
+			}
+		}
+		
+		return dp[n];
 	}
 
 }
