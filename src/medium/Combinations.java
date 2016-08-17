@@ -15,7 +15,7 @@ public class Combinations {
 		// TODO Auto-generated method stub
 
 		//定义一个集合
-		int[] array = {1,2,2,2};
+		int[] array = {1,2,2};
 		System.out.println(getAllCombinations(array));
 		
 	}
@@ -45,7 +45,7 @@ public class Combinations {
      * @param list
      */
     public static void dfs(int[] array,int start,List<Integer> item,List<List<Integer>> list) {
-    	if(item.size() != 0){
+    	if(item.size() > 0){
     		List<Integer> t = new ArrayList<Integer>(item);
             list.add(t);
     	}
@@ -53,7 +53,7 @@ public class Combinations {
         for(int i = start,n = array.length;i < n;i++){
             item.add(array[i]);
             dfs(array,i + 1,item,list);
-            item.remove(item.size() - 1);
+            item.remove(item.size() - 1);//这里list的删除，只能根据下标index值删除元素，无法根据元素值删除
         }
     }
     
@@ -73,6 +73,7 @@ public class Combinations {
     		dfs_repeated(list, item, i + 1, array);
     		item.remove(item.size() - 1);
     		i++;
+    		//排除重复的元素，直到找到一个不重复的元素时再添加
     		while(i < array.length && array[i] == array[i - 1])
     			i++;
     	}

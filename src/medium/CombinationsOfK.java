@@ -3,12 +3,10 @@ package medium;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class CombinationsOfK {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 		int[] array = {2,3,4,5};
 		int k = 2;
 		System.out.println(getCombinationsOfM(array, k));
@@ -33,9 +31,17 @@ public class CombinationsOfK {
 		
 	}
 
-    //depth first search, 回溯
+    /**
+     * depth first search, 回溯
+     * @param array
+     * @param n
+     * @param k
+     * @param start
+     * @param item
+     * @param list
+     */
     public static void dfs(int[] array,int n,int k,int start,List<Integer> item,List<List<Integer>> list) {
-        
+        //通过这里限制item中元素个数来达到目的
         if(item.size() == k){
             //这里必须这样写，新建一个对象new ArrayList<Integer>
             //new ArrayList<Integer>(item),是将Item中的元素放到新建立的对象里

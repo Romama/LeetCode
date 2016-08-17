@@ -37,7 +37,7 @@ public class MergeKSortedLists {
 		int len = list.length; 
 		if(len == 1)
 			return list[0];
-		int mid = (len - 1)/ 2; //二分的时候，注意 mid = (len - 1) / 2,而不是 len/2，因为后者平分不均匀，前一种划分更为合理
+		int mid = (len - 1) / 2; //二分的时候，注意 mid = (len - 1) / 2,而不是 len/2，因为后者平分不均匀，前一种划分更为合理
 		LinkNode[] list1 = new LinkNode[mid + 1] ;
 		LinkNode[] list2 = new LinkNode[len - mid - 1] ;
 		for(int i = 0 ;i < list1.length ; i++)

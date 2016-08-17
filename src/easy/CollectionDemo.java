@@ -13,12 +13,13 @@ public class CollectionDemo {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		
 		//set集合的存、取
 		Set<Integer> set = new HashSet<Integer>();
 		set.add(1);
 		set.add(2);
 		set.add(3);
+		set.add(1);
 		
 		Iterator<Integer> iterator = set.iterator();
 		/*//set集合的迭代器
@@ -65,6 +66,10 @@ public class CollectionDemo {
 			System.out.println(next.getKey() + " : " + next.getValue());
 		}
 		
+		Map<Integer,Integer> mm = new HashMap<Integer,Integer>();
+		for(Map.Entry<Integer, Integer> entry : mm.entrySet()){
+			System.out.println(entry.getKey() + " ; " + entry.getValue());
+		}
 		
 		//第二种方式遍历map，推荐使用这种方式遍历map
 		for(Map.Entry<Integer, Integer> entry : map.entrySet()){
