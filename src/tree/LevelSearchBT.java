@@ -30,7 +30,7 @@ public class LevelSearchBT {
 	}
 	
 	/**
-	 * 广度优先遍历二叉树，按层输出每层的结点
+	 * 广度优先遍历二叉树
 	 * @param root
 	 */
 	public static void bfs(TreeNode root){

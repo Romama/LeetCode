@@ -7,16 +7,16 @@ import java.util.List;
 public class ManyTreeNode {  
 	    
     //节点的内容  
-    private NodeBean  data ;  
+    private MultiTreeNode  data ;  
     
     //节点列表  
   	private List<ManyTreeNode> childList; 
     
-    public NodeBean getData() {
+    public MultiTreeNode getData() {
 	    return data;
     }
 	
-	public void setData(NodeBean data) {
+	public void setData(MultiTreeNode data) {
 		this.data = data;
 	}
 	
@@ -30,13 +30,13 @@ public class ManyTreeNode {
 	    
 	//构造函数  
 	public ManyTreeNode(){  
-	    data = new NodeBean();  
+	    data = new MultiTreeNode();  
 	    childList = new ArrayList<ManyTreeNode>();  
 	}  
 	    
 	//构造函数 可以指定key的值  
 	public ManyTreeNode(int key){  
-	    data = new NodeBean();  
+	    data = new MultiTreeNode();  
 	    data.setKey(key);  
 	    childList = new ArrayList<ManyTreeNode>();  
 	}      

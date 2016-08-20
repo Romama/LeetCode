@@ -14,7 +14,7 @@ public class DepthOfBinaryTree {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		
 		 Object[] array = { 1, 2, 3, 4, 5, 6, 7 };  //构造二叉树的结点值
 		 TreeNode root = BinaryTree.createBinaryTree(array);
 		 

@@ -10,7 +10,9 @@ import java.util.List;
  */
 public class BianryTreePaths {
 
+	//存储所有路径
 	static List<String> list = new ArrayList<String>();
+	//记录一条路径
 	static List<Integer> path = new ArrayList<Integer>();
 	public static void main(String[] args){
 		 Object[] array = {1,2,3,4,5,6,7,8,9,10};  //构造二叉树的结点值
@@ -28,6 +30,11 @@ public class BianryTreePaths {
        return list;
     }
     
+    /**
+     * 采用递归、回溯法
+     * 先序遍历二叉树
+     * @param root
+     */
     public static void getPath(TreeNode root){
     	 if(root == null)
          	return;
@@ -49,7 +56,5 @@ public class BianryTreePaths {
     	 getPath(root.right);
     	 
     	 path.remove(path.size() - 1);
-    	 
-    	 return;
     }
 }

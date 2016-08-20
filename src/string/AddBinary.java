@@ -16,7 +16,8 @@ public class AddBinary {
 		System.out.println(addBinary(a, b));
 	}
 	
-	 public static String addBinary(String a, String b) {
+	//二进制数相加
+	public static String addBinary(String a, String b) {
 	        if(a == null && b == null) return null;
 	        else if(a == null) return b;
 	        else if(b == null) return a;
@@ -47,7 +48,4 @@ public class AddBinary {
 	            
 	        return result;
 	    }
-	 
-	
-
 }

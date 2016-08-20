@@ -58,6 +58,7 @@ public class ReturnGetHint {
 	        hint = bulls + "A" + cows + "B";
 	        return hint;
     }
+	 
     public static int findx(char[] rec,char x){
 		 for(int i= 0;i < rec.length;i++)
 			 if(rec[i] == x)

@@ -9,9 +9,6 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 
-
-
-
 /**
  * 判断是否是相同字符异序词
  * @author Administrator

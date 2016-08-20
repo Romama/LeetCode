@@ -5,7 +5,6 @@ package tree;
  * BBT
  * 平衡二叉树
  * @author admin
- *
  */
 public class BalancedBinaryTree {
 
@@ -61,8 +60,8 @@ public class BalancedBinaryTree {
     }
     
     /**
-     * 不求二叉树的高度
-     * 递归检查一棵树是不是平衡二叉树
+     * 递归
+     * 比方法一优化的地方在于这里没有多次遍历同一个节点的情况
      * @param node
      * @return
      */

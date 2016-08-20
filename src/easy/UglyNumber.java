@@ -1,33 +1,36 @@
 package easy;
 
+
 /**
- * 判断一个数是不是丑数
- * @author Administrator
+ * 将一个整数进行素数分解，若其分解得到的因子中只有2或3或5，而不含有其它素数，则称该数为ugly number，否则不是ugly number。
+ * @author admin
  *
  */
 public class UglyNumber {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		int n = 8;
-		System.out.println(isUglyNumber(n));
+	public static void main(String[] args){
+		int num = 17;
+		System.out.println(isUgly(num));
 	}
 	
-	//判断一个正整数是不是丑数，将2，3，5 因子都除掉，看最后是否剩下1，若还有其他质因子，返回false
-	public static boolean isUglyNumber(int n){
-		if(n <= 0)
-			return false;
-		while(n % 2 == 0)
-			n = n >> 1; //位运算的效率要高于算术运算
-		while(n % 3 == 0)
-			n = n / 3;
-		while(n % 5 == 0)
-			n = n / 5;
-		if(n == 1)
-			return true;
-		else 
-			return false;
+	/**
+	 * 判断一个数是不是ugly number
+	 * @param num
+	 * @return
+	 */
+	
+	//将num除去2,3,5这三个因子后，应该得到最终结果为1，若不为1，就不是ugly number
+	public static boolean isUgly(int num) {
+	   if(num <= 0) //题目要求是整数，所以对于非整数一定要进行排除，否则会超时
+		   return false;
+	   while(num % 2 == 0)//如果存在2的质因子，则将所有2都找出来
+           num = num / 2;
+       while(num % 3 == 0)//接着找出所有的3
+           num = num / 3;
+       while(num % 5 == 0)//找出所有的5
+           num = num / 5;
+       return (num == 1) ;//若除了2,3,5之外，不存在其他质数因子，则为ugly number
+ 
 	}
-
+	
 }
